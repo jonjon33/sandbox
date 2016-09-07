@@ -2,20 +2,25 @@
 # Problem A: Store Credit
 # Jon Hanson
 
+#
 # Declare Variables
-ifile = 'A-large-practice.in'
-ofile = 'A-large-practice.out'
-caselist = []
+#
+ifile = 'input.txt'     # simple input
+ofile = 'output.txt'    # simple output
+#ifile = 'A-large-practice.in'   # official input
+#ofile = 'A-large-practice.out'  # official output
+caselist = []           # list containing cases
 
-
+#
 # Problem State (Case) Class
+#
 class CredCase(object):
-    def __init__(self,credit,itemCount,items):
-        self.credit = int(credit)
-        self.itemCount = int(itemCount)
-        self.items = map(int,items.split())
-        self.cost = -1
-        self.solution = []
+    def __init__(self,credit,itemCount,items):  # Initialize:
+        self.credit = int(credit)                   # credit amount
+        self.itemCount = int(itemCount)             # item count
+        self.items = list(map(int,items.split()))   # item values list
+        self.cost = -1                              # total cost
+        self.solution = []                          # output list
 
     def trySolution(self,indices):
         cost = self.items[indices[0]] + self.items[indices[1]]
@@ -23,16 +28,18 @@ class CredCase(object):
             self.cost = cost
             self.solution = [x+1 for x in indices]
 
-
+#
 # Read Input File
+#
 with open(ifile) as f:
     cases = int(f.readline())
     for n in range(0,cases):
         case =  CredCase(f.readline(),f.readline(),f.readline())
         caselist.append(case)
 
-
+#
 # Conduct Algorithm
+#
 for n in range(0,cases):
     case = caselist[n]
 
@@ -44,8 +51,9 @@ for n in range(0,cases):
         if case.credit == case.cost:
             break
 
-
+#
 # Write Output File
+#
 with open(ofile,'w') as f:
     for n in range(0,cases):
         case = caselist[n]
